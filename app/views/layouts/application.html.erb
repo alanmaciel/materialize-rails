@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Materialize</title>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1.0" name="viewport" />
+    <meta content="/" name="turbolinks-root" />
+
+    <meta content="no-preview" name="turbolinks-cache-control" />
+    <%= csrf_meta_tags %>
+    <%= favicon_link_tag     'favicon.png' %>
+    <%= stylesheet_link_tag  'application', 'data-turbolinks-track': 'reload', media: 'all' %>
+    <%= stylesheet_pack_tag  'application', 'data-turbolinks-track': 'reload', media: 'all' %>
+    <%= javascript_pack_tag  'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag  'application', 'data-turbolinks-track': 'reload' %>
+    <%= toast %>
+    <% swatch = %w(lighten darken accent).sample %>
+  </head>
+  <body>
+    <header class="navbar-fixed">
+      <nav class="<%= @color %> darken-1">
+        <div class="nav-wrapper container">
+          <a class="button-collapse sidenav-trigger show-on-large" data-target="slide-out" data-turbolinks="false" href="#" id="sidenav">
+            <i class="material-icons right">apps</i>
+          </a>
+          <a class="brand-logo" href="/" id="logo-container">
+            <%= inline_svg "logo.svg", class: "main-logo" %>
+          </a>
+          <ul class="right" id="nav-mobile">
+            <li><a href="/">Home</a></li>
+            <li>
+              <a href="/posts">
+                <span>Posts</span>
+                <span class="new badge">4</span>
+              </a>
+            </li>
+            <li><a href="/components"> Components</a></li>
+            <li><a href="/javascript"> Javascript</a></li>
+            <li><a href="/forms"> Forms</a></li>
+            <!--Dropdown Trigger -->
+            <% if user_signed_in? %>
+              <li>
+                <a class="dropdown-button" data-target="dropdown1" href="#!">
+                  <span><%= current_user.email %></span>
+                  <i class="material-icons right">arrow_drop_down</i>
+                </a>
+              </li>
+            <% else %>
+              <li><%= link_to (t :sign_in), new_user_session_url %></li>
+            <% end %>
+          </ul>
+          <% if user_signed_in? %>
+            <ul class="dropdown-content" id="dropdown1">
+              <li><%= link_to (t :profile), edit_user_registration_url %></li>
+              <li class="divider"></li>
+              <li>
+                <%= link_to (t :sign_out), destroy_user_session_url, data: {method: :delete} %>
+              </li>
+            </ul>
+          <% end %>
+        </div>
+      </nav>
+    </header>
+    <aside>
+      <%= render "layouts/sidebar" %>
+    </aside>
+    <main>
+      <%= yield(:jumbotron) if content_for?(:jumbotron) %>
+      <% if devise_controller? %>
+        <section id="login">
+          <div class="container-fluid pt-3">
+            <div class="row">
+              <div class="col s4 offset-s4">
+                <%= yield %>
+              </div>
+            </div>
+          </div>
+        </section>
+      <% else %>
+        <div class="container">
+          <%= yield %>
+        </div>
+      <% end %>
+    </main>
+    <footer class="page-footer <%= @color %>">
+      <%= render 'layouts/footer' %>
+    </footer>
+  </body>
+</html>

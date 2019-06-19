@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <meta content="/" name="turbolinks-root" />
+    <meta content="no-preview" name="turbolinks-cache-control" />
+    <title>Materialize</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <%= stylesheet_link_tag    'application', 'data-turbolinks-track': "reload",  media: 'all' %>
+    <%= javascript_pack_tag    'application', 'data-turbolinks-track': "reload" %>
+    <%= javascript_include_tag    'application', 'data-turbolinks-track': "reload" %>
+    <%= csrf_meta_tags %>
+    <% @color = %w(pink red purple deep-purple indigo blue light-blue cyan teal green light-green lime yellow amber orange deep-orange brown grey).sample %>
+    <style type="text/css">
+     .brand-logo {
+       display: flex;
+       justify-content: center;
+       margin-bottom: 1rem;
+     }
+    </style>
+  </head>
+  <body class="<%= @color %>">
+    <main style="padding-top: 4rem">
+      <section id="login">
+        <div class="container-fluid pt-3">
+          <div class="row">
+            <div class="col s4 offset-s4">
+              <div class="brand-logo mx-auto">
+                <%= inline_svg "logo.svg", class: "main-logo" %>
+                <i class="material-icons white-text">close</i>
+                <%= inline_svg "rails-logo.svg", class: "main-logo" %>
+              </div>
+              <%= yield %>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

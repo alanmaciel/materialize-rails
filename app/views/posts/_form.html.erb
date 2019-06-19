@@ -1,0 +1,54 @@
+<%= form_for @post do |f| %>
+  <% if @post.errors.any? %>
+    <div id="error_explanation">
+      <pre>
+        <%= "#{pluralize(@post.errors.count, "error")} prohibited this post from being saved:" %>
+        <ul>
+          <% @post.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </pre>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="col s12">
+      <div class="row">
+        <div class="input-field col s10">
+          <i class="material-icons prefix">title</i>
+          <%= f.text_field :title, placeholder: "Please use appropriate punctuation" %>
+          <%= f.label :title %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s10">
+          <i class="material-icons prefix">descriptions</i>
+          <%= f.text_area :body, placeholder: "some text here", class: "materialize-textarea", data: {length: "360"} %>
+          <%= f.label :body %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s10">
+          <i class="material-icons prefix">published</i>
+          <%= f.check_box :published, class:"checkbox" %>
+          <%= f.label :published %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s10">
+          <i class="material-icons prefix">images</i>
+          <%= f.file_field :images, multiple: true %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s3">
+          <%= f.button class: "waves-effect waves-light btn ", type: :submit do |btn| %>
+            Create
+            <i class="material-icons right">send</i>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col s12">
+    <div class="card material-table">
+      <div class="table-header">
+        <h5>Listing posts</h5>
+        <div class="actions" data-turbolinks="false">
+          <a class="search-toggle waves-effect btn-flat nopadding" href="#">
+            <i class="material-icons">search</i>
+          </a>
+        </div>
+      </div>
+      <table class="responsive nowrap table table-hover" data-sort="true" data-source="<%= url_for(format: :json) %>" id="dttb">
+        <thead>
+          <tr>
+            <th data-data="title">Title</th>
+            <th data-data="body">Body</th>
+            <th data-data="published" width="100px">Published</th>
+            <th data-data="created_at" width="200px">Created at</th>
+            <th class="skip-export" data-class-name="all right-align" data-data="url" data-orderable="false" data-searchable="false" width="100px"></th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="fixed-action-btn">
+  <a class="waves-effect waves-light btn btn-floating btn-large cyan" href="<%= new_post_path %>" id="newpost">
+    <i class="large material-icons">add</i>
+  </a>
+</div>
